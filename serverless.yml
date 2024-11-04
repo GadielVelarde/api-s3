@@ -11,20 +11,32 @@ provider:
     role: arn:aws:iam::692614634256:role/LabRole
 
 functions:
-  lista_buckets:
-    handler: lista_buckets.lambda_handler
+  create_bucket:
+    handler: create_bucket.create_bucket
     memorySize: 512
     events:
       - http:
-          path: /s3/lista-buckets
-          method: get
+          path: /s3/create-bucket
+          method: post
           cors: true
           integration: lambda
-  lista_objetos_bucket:
-    handler: lista_objetos_bucket.lambda_handler
+
+  create_directory:
+    handler: create_directory.create_directory
+    memorySize: 512
     events:
       - http:
-          path: /s3/bucket/lista-objetos
+          path: /s3/create-directory
+          method: post
+          cors: true
+          integration: lambda
+
+  upload_file:
+    handler: upload_file.upload_file
+    memorySize: 512
+    events:
+      - http:
+          path: /s3/upload
           method: post
           cors: true
           integration: lambda
